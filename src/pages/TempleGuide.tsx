@@ -54,7 +54,7 @@ const TempleGuide = () => (
                         Sacred Temples <span className="text-gradient-saffron">Near Us</span>
                     </h1>
                     <p className="text-muted-foreground max-w-2xl mx-auto">
-                        Discover the divine temples of Mathura and Vrindavan — all within easy reach of MadhurVass Homestay.
+                        Discover the divine temples of Mathura and Vrindavan — all within easy reach of Madhur Vas Homestay.
                         Each temple has its own unique spiritual energy and centuries of sacred history.
                     </p>
                 </AnimatedSection>
@@ -107,8 +107,8 @@ const TempleGuide = () => (
                     <h2 className="font-heading text-2xl font-bold text-foreground text-center mb-6">📍 Our Location</h2>
                     <div className="rounded-xl overflow-hidden shadow-golden border border-border">
                         <iframe
-                            title="MadhurVass Homestay Location"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56552.22659390938!2d77.6309395!3d27.4924134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39736ce47bfab5d3%3A0xc4b7940b5b1a66e2!2sMathura%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1710000000000"
+                            title="Madhur Vas Homestay Location - Near Krishna Janmabhoomi"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3544.5!2d77.6718!3d27.5046!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39736ce47bfab5d3%3A0x63c1c74b21f8b1a!2sShri%20Krishna%20Janmabhoomi!5e0!3m2!1sen!2sin!4v1710000000000"
                             width="100%"
                             height="400"
                             style={{ border: 0 }}
@@ -119,7 +119,7 @@ const TempleGuide = () => (
                     </div>
                     <div className="text-center mt-4">
                         <a
-                            href="https://www.google.com/maps/dir//Mathura,+Uttar+Pradesh"
+                            href="https://www.google.com/maps/dir//Krishna+Janmabhoomi,+Mathura,+Uttar+Pradesh"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 bg-gradient-saffron text-primary-foreground px-6 py-3 rounded-lg text-sm font-semibold hover:opacity-90 transition-all hover:scale-105"

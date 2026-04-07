@@ -1,18 +1,20 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-
-const navLinks = [
-  { to: "/", label: "Home" },
-  { to: "/rooms", label: "Rooms & Booking" },
-  { to: "/culture", label: "Cultural Experience" },
-  { to: "/temples", label: "Temple Guide" },
-  { to: "/contact", label: "Contact" },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const { t } = useLanguage();
+
+  const navLinks = [
+    { to: "/", label: t("home") },
+    { to: "/rooms", label: t("rooms_booking") },
+    { to: "/culture", label: t("cultural_experience") },
+    { to: "/temples", label: t("temple_guide") },
+    { to: "/contact", label: t("contact") },
+  ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-40 bg-card/90 backdrop-blur-md border-b border-border shadow-warm">
@@ -20,7 +22,7 @@ const Navbar = () => {
         <Link to="/" className="flex items-center gap-2">
           <span className="text-2xl">🪷</span>
           <span className="font-heading text-lg md:text-xl font-bold text-gradient-saffron">
-            MadhurVass
+            Madhur Vas
           </span>
         </Link>
 
@@ -30,11 +32,10 @@ const Navbar = () => {
             <li key={l.to}>
               <Link
                 to={l.to}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                  location.pathname === l.to
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${location.pathname === l.to
                     ? "bg-primary/10 text-primary font-semibold"
                     : "text-foreground/70 hover:text-primary hover:bg-primary/5"
-                }`}
+                  }`}
               >
                 {l.label}
               </Link>
@@ -46,7 +47,7 @@ const Navbar = () => {
           to="/rooms"
           className="hidden md:inline-flex bg-gradient-saffron text-primary-foreground px-5 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity"
         >
-          Book Now
+          {t("book_now")}
         </Link>
 
         {/* Mobile toggle */}
@@ -68,11 +69,10 @@ const Navbar = () => {
                 <Link
                   to={l.to}
                   onClick={() => setOpen(false)}
-                  className={`block px-4 py-3 rounded-md text-sm font-medium transition-colors ${
-                    location.pathname === l.to
+                  className={`block px-4 py-3 rounded-md text-sm font-medium transition-colors ${location.pathname === l.to
                       ? "bg-primary/10 text-primary font-semibold"
                       : "text-foreground/70 hover:text-primary"
-                  }`}
+                    }`}
                 >
                   {l.label}
                 </Link>
@@ -84,7 +84,7 @@ const Navbar = () => {
                 onClick={() => setOpen(false)}
                 className="block bg-gradient-saffron text-primary-foreground text-center px-4 py-3 rounded-lg text-sm font-semibold mt-2"
               >
-                Book Now
+                {t("book_now")}
               </Link>
             </li>
           </ul>

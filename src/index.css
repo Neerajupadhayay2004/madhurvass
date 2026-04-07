@@ -47,7 +47,7 @@
 
     --gradient-saffron: linear-gradient(135deg, hsl(30 90% 50%), hsl(43 80% 55%));
     --gradient-divine: linear-gradient(180deg, hsl(39 50% 96%), hsl(35 40% 90%));
-    --gradient-hero: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.6) 100%);
+    --gradient-hero: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.6) 100%);
     --shadow-golden: 0 4px 30px -5px hsl(43 80% 55% / 0.3);
     --shadow-warm: 0 10px 40px -10px hsl(30 90% 50% / 0.2);
 
@@ -66,10 +66,17 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground font-body antialiased;
   }
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-heading;
   }
 }
@@ -81,40 +88,82 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+
   .bg-gradient-saffron {
     background: linear-gradient(135deg, hsl(30 90% 50%), hsl(43 80% 55%));
   }
+
   .bg-gradient-divine {
     background: linear-gradient(180deg, hsl(39 50% 96%), hsl(35 40% 90%));
   }
+
   .shadow-golden {
     box-shadow: 0 4px 30px -5px hsl(43 80% 55% / 0.3);
   }
+
   .shadow-warm {
     box-shadow: 0 10px 40px -10px hsl(30 90% 50% / 0.2);
   }
+
   .mandala-border {
     border-image: linear-gradient(135deg, hsl(30 90% 50%), hsl(43 80% 55%)) 1;
   }
 }
 
 @keyframes float-petal {
-  0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 0.8; }
-  100% { transform: translateY(110vh) rotate(360deg) translateX(100px); opacity: 0; }
+  0% {
+    transform: translateY(-10vh) rotate(0deg) translateX(0);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translateY(110vh) rotate(360deg) translateX(100px);
+    opacity: 0;
+  }
 }
 
 @keyframes glow-pulse {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
+
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
 @keyframes diya-flicker {
-  0%, 100% { transform: scale(1); opacity: 0.8; }
-  25% { transform: scale(1.05); opacity: 1; }
-  50% { transform: scale(0.98); opacity: 0.7; }
-  75% { transform: scale(1.02); opacity: 0.9; }
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  25% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(0.98);
+    opacity: 0.7;
+  }
+
+  75% {
+    transform: scale(1.02);
+    opacity: 0.9;
+  }
 }
 
 .animate-float-petal {

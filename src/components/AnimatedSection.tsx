@@ -22,9 +22,8 @@ const AnimatedSection = ({ children, className = "", animation = "fade-up", dela
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ease-out ${className} ${
-        isVisible ? "translate-y-0 translate-x-0 scale-100 opacity-100" : animationClasses[animation]
-      }`}
+      className={`transition-all duration-700 ease-out ${className} ${isVisible ? "translate-y-0 translate-x-0 scale-100 opacity-100" : animationClasses[animation]
+        }`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -33,3 +32,4 @@ const AnimatedSection = ({ children, className = "", animation = "fade-up", dela
 };
 
 export default AnimatedSection;
+

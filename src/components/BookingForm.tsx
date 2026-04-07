@@ -3,7 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 import AnimatedSection from "./AnimatedSection";
+import UpiPayment from "./UpiPayment";
 
 const roomTypes = [
   { id: "standard", name: "Standard Sacred Room", price: 1200 },
@@ -14,15 +16,12 @@ const roomTypes = [
 
 const BookingForm = () => {
   const [form, setForm] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    checkin: "",
-    checkout: "",
-    guests: "1",
-    room: "standard",
+    name: "", phone: "", email: "", checkin: "", checkout: "", guests: "1", room: "standard",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [bookingId, setBookingId] = useState<string | null>(null);
+  const [showPayment, setShowPayment] = useState(false);
+  const [saving, setSaving] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -38,30 +37,42 @@ const BookingForm = () => {
 
   const nights = getNights();
   const total = nights * selectedRoom.price;
-
   const today = new Date().toISOString().split("T")[0];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.phone || !form.email || !form.checkin || !form.checkout) {
       toast.error("Please fill all required fields");
       return;
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(form.email)) {
-      toast.error("Please enter a valid email");
+    if (!emailRegex.test(form.email)) { toast.error("Please enter a valid email"); return; }
+    if (form.phone.length < 10) { toast.error("Please enter a valid phone number"); return; }
+    if (new Date(form.checkout) <= new Date(form.checkin)) { toast.error("Check-out must be after check-in"); return; }
+
+    setSaving(true);
+    const { data, error } = await supabase.from("bookings").insert({
+      guest_name: form.name,
+      phone: form.phone,
+      email: form.email,
+      room_type: selectedRoom.name,
+      check_in: form.checkin,
+      check_out: form.checkout,
+      guests_count: parseInt(form.guests),
+      total_price: total,
+    }).select("id").single();
+
+    setSaving(false);
+
+    if (error) {
+      toast.error("Failed to save booking. Please try WhatsApp.");
       return;
     }
-    if (form.phone.length < 10) {
-      toast.error("Please enter a valid phone number");
-      return;
-    }
-    if (new Date(form.checkout) <= new Date(form.checkin)) {
-      toast.error("Check-out must be after check-in");
-      return;
-    }
+
+    setBookingId(data.id);
     setSubmitted(true);
-    toast.success("🙏 Radhe Radhe! Booking request submitted successfully!");
+    setShowPayment(true);
+    toast.success("🙏 Radhe Radhe! Booking saved successfully!");
   };
 
   const whatsappMsg = encodeURIComponent(
@@ -75,19 +86,29 @@ const BookingForm = () => {
           <span className="text-5xl mb-4 block">🙏</span>
           <h3 className="font-heading text-2xl font-bold text-foreground mb-2">Radhe Radhe! Booking Received</h3>
           <p className="text-muted-foreground mb-2">
-            Thank you, <strong>{form.name}</strong>! Your booking for <strong>{selectedRoom.name}</strong> has been received.
+            Thank you, <strong>{form.name}</strong>! Your booking for <strong>{selectedRoom.name}</strong> has been saved.
           </p>
           <div className="bg-muted rounded-lg p-4 my-4 text-sm text-left max-w-sm mx-auto space-y-1">
             <p>📅 <strong>Check-in:</strong> {form.checkin}</p>
             <p>📅 <strong>Check-out:</strong> {form.checkout}</p>
             <p>🌙 <strong>Nights:</strong> {nights}</p>
             <p>👥 <strong>Guests:</strong> {form.guests}</p>
-            <p>💰 <strong>Estimated Total:</strong> ₹{total.toLocaleString("en-IN")}</p>
+            <p>💰 <strong>Total:</strong> ₹{total.toLocaleString("en-IN")}</p>
           </div>
-          <p className="text-muted-foreground text-sm mb-6">We'll confirm your booking within 1 hour via phone/WhatsApp.</p>
+
+          {/* UPI Payment */}
+          {showPayment && bookingId && (
+            <UpiPayment
+              bookingId={bookingId}
+              total={total}
+              onComplete={() => setShowPayment(false)}
+            />
+          )}
+
+          <p className="text-muted-foreground text-sm my-4">Or confirm via WhatsApp / Email:</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
-              href={`https://wa.me/9193232929?text=${whatsappMsg}`}
+              href={`https://wa.me/919193232929?text=${whatsappMsg}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 bg-green-600 text-primary-foreground px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-green-700 transition-colors"
@@ -95,7 +116,7 @@ const BookingForm = () => {
               💬 Confirm on WhatsApp
             </a>
             <button
-              onClick={() => { setSubmitted(false); setForm({ name: "", phone: "", email: "", checkin: "", checkout: "", guests: "1", room: "standard" }); }}
+              onClick={() => { setSubmitted(false); setShowPayment(false); setBookingId(null); setForm({ name: "", phone: "", email: "", checkin: "", checkout: "", guests: "1", room: "standard" }); }}
               className="text-primary text-sm font-medium hover:underline"
             >
               Make Another Booking
@@ -110,20 +131,12 @@ const BookingForm = () => {
     <form onSubmit={handleSubmit} className="bg-card rounded-xl p-6 md:p-8 shadow-golden space-y-5 border border-border">
       <h3 className="font-heading text-2xl font-bold text-foreground">Book Your Sacred Stay</h3>
 
-      {/* Room Selection */}
       <div className="space-y-1.5">
         <Label htmlFor="room">Select Room Type *</Label>
-        <select
-          id="room"
-          name="room"
-          value={form.room}
-          onChange={handleChange}
-          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:ring-2 focus:ring-ring"
-        >
+        <select id="room" name="room" value={form.room} onChange={handleChange}
+          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:ring-2 focus:ring-ring">
           {roomTypes.map((r) => (
-            <option key={r.id} value={r.id}>
-              {r.name} — ₹{r.price.toLocaleString("en-IN")}/night
-            </option>
+            <option key={r.id} value={r.id}>{r.name} — ₹{r.price.toLocaleString("en-IN")}/night</option>
           ))}
         </select>
       </div>
@@ -143,13 +156,8 @@ const BookingForm = () => {
         </div>
         <div className="space-y-1.5">
           <Label htmlFor="guests">Guests</Label>
-          <select
-            id="guests"
-            name="guests"
-            value={form.guests}
-            onChange={handleChange}
-            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
-          >
+          <select id="guests" name="guests" value={form.guests} onChange={handleChange}
+            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background">
             {[1, 2, 3, 4, 5, 6].map((n) => (
               <option key={n} value={n}>{n} Guest{n > 1 ? "s" : ""}</option>
             ))}
@@ -165,7 +173,6 @@ const BookingForm = () => {
         </div>
       </div>
 
-      {/* Price Summary */}
       {nights > 0 && (
         <div className="bg-muted/60 rounded-lg p-4 border border-border">
           <div className="flex justify-between text-sm text-muted-foreground mb-1">
@@ -180,21 +187,15 @@ const BookingForm = () => {
       )}
 
       <div className="flex flex-col sm:flex-row gap-3 pt-2">
-        <Button type="submit" className="bg-gradient-saffron text-primary-foreground hover:opacity-90 flex-1 h-12 text-base">
-          🙏 Submit Booking
+        <Button type="submit" disabled={saving} className="bg-gradient-saffron text-primary-foreground hover:opacity-90 flex-1 h-12 text-base">
+          {saving ? "Saving..." : "🙏 Submit Booking"}
         </Button>
-        <a
-          href={`https://wa.me/9193232929?text=${whatsappMsg}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-2 bg-green-600 text-primary-foreground px-5 py-3 rounded-lg text-sm font-semibold hover:bg-green-700 transition-colors flex-1"
-        >
+        <a href={`https://wa.me/919193232929?text=${whatsappMsg}`} target="_blank" rel="noopener noreferrer"
+          className="inline-flex items-center justify-center gap-2 bg-green-600 text-primary-foreground px-5 py-3 rounded-lg text-sm font-semibold hover:bg-green-700 transition-colors flex-1">
           💬 Book via WhatsApp
         </a>
-        <a
-          href="mailto:Agshobh@gmail.com?subject=Booking Inquiry - MadhurVass Homestay"
-          className="inline-flex items-center justify-center gap-2 bg-accent text-accent-foreground px-5 py-3 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity flex-1"
-        >
+        <a href="mailto:Agshobh@gmail.com?subject=Booking Inquiry - Madhur Vas Homestay"
+          className="inline-flex items-center justify-center gap-2 bg-accent text-accent-foreground px-5 py-3 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity flex-1">
           📧 Send Email
         </a>
       </div>

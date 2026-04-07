@@ -78,7 +78,7 @@ const CulturalExperience = () => (
             "Live like a local in Krishna's land"
           </h2>
           <p className="text-muted-foreground leading-relaxed text-lg mb-4">
-            At MadhurVass, we don't just offer rooms — we offer a doorway into centuries of devotion.
+            At Madhur Vas, we don't just offer rooms — we offer a doorway into centuries of devotion.
             Wake up to temple bells, walk barefoot on sacred grounds, share stories with local devotees,
             and let the divine energy of Mathura and Vrindavan transform your journey.
           </p>
@@ -135,7 +135,7 @@ const CulturalExperience = () => (
     <section className="py-16 bg-muted/50">
       <div className="container mx-auto px-4 max-w-2xl">
         <AnimatedSection className="text-center mb-10">
-          <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-2">A Day at MadhurVass ☀️</h2>
+          <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-2">A Day at Madhur Vas ☀️</h2>
           <p className="text-muted-foreground">Your typical spiritual day in Mathura</p>
         </AnimatedSection>
         <div className="space-y-3">

@@ -7,20 +7,21 @@ interface Message {
 }
 
 const initialMessages: Message[] = [
-  { role: "bot", text: "🙏 Radhe Radhe! Welcome to MadhurVass Homestay. How can I help you today?\n\nYou can ask me about:\n• 🏨 Room availability & pricing\n• 🛕 Nearby temples\n• 📍 Directions & transport\n• 🎭 Cultural experiences\n• 📞 Contact & booking" },
+  { role: "bot", text: "🙏 Radhe Radhe! Welcome to Madhur Vas Homestay. How can I help you today?\n\nYou can ask me about:\n• 🏨 Room availability & pricing\n• 🛕 Nearby temples\n• 📍 Directions & transport\n• 🎭 Cultural experiences\n• 📞 Contact & booking" },
 ];
 
 const botResponses: Record<string, string> = {
-  room: "🏨 We have 4 room types:\n\n• **Standard Sacred Room** — ₹1,200/night\n• **Deluxe Temple View** — ₹2,000/night\n• **Premium Divine Suite** — ₹3,500/night\n• **Family Krishna Suite** — ₹4,500/night\n\nAll rooms include WiFi & breakfast. Book via WhatsApp: wa.me/9193232929",
+  room: "🏨 We have 4 room types:\n\n• **Standard Sacred Room** — ₹1,200/night\n• **Deluxe Temple View** — ₹2,000/night\n• **Premium Divine Suite** — ₹3,500/night\n• **Family Krishna Suite** — ₹4,500/night\n\nAll rooms include WiFi & breakfast. Book via WhatsApp: wa.me/919193232929",
   price: "💰 Our pricing:\n• Standard: ₹1,200/night\n• Deluxe: ₹2,000/night\n• Premium: ₹3,500/night\n• Family: ₹4,500/night\n\nSpecial discounts for 3+ nights!",
   temple: "🛕 Nearby temples:\n• **Banke Bihari** — 2.5 km\n• **ISKCON Vrindavan** — 4 km\n• **Krishna Janmabhoomi** — 1.5 km\n• **Prem Mandir** — 5 km\n\nWe can arrange guided temple visits!",
-  book: "📝 To book your stay:\n1. Visit our Rooms page & fill the booking form\n2. Or WhatsApp us: wa.me/9193232929\n3. Or email: Agshobh@gmail.com\n\nWe'll confirm within 1 hour! 🙏",
-  location: "📍 We're located in Mathura, Uttar Pradesh.\n\n🚆 Mathura Junction: 3 km\n✈️ Agra Airport: 55 km\n✈️ Delhi IGI: 160 km\n🚗 Via NH-2 from Delhi: ~3 hrs\n\nWe offer pickup service!",
+  book: "📝 To book your stay:\n1. Visit our Rooms page & fill the booking form\n2. Or WhatsApp us: wa.me/919193232929\n3. Or email: Agshobh@gmail.com\n4. Pay via UPI after booking!\n\nWe'll confirm within 1 hour! 🙏",
+  location: "📍 We're located Near Krishna Janmabhoomi, Mathura, UP.\n\n🚆 Mathura Junction: 3 km\n✈️ Agra Airport: 55 km\n✈️ Delhi IGI: 160 km\n🚗 Via NH-2 from Delhi: ~3 hrs\n\nWe offer pickup service!",
   holi: "🎨 Holi in Vrindavan is magical! Celebrated over a week with:\n• Lathmar Holi at Barsana\n• Phoolon Ki Holi at Banke Bihari\n• Color celebrations everywhere\n\nBook early — rooms fill up fast during Holi! 🌸",
   food: "🍽️ While we don't have a restaurant, we provide:\n• Complimentary breakfast\n• Local restaurant recommendations\n• Prasad from nearby temples\n\nMathura is famous for its pedas and lassi!",
-  checkin: "🕐 Check-in: 12:00 PM\n🕐 Check-out: 11:00 AM\n\nEarly check-in & late checkout available on request (subject to availability).",
-  contact: "📞 Contact us:\n• Phone: +91 9323292299\n• WhatsApp: wa.me/9193232929\n• Email: Agshobh@gmail.com\n\nWe respond within 30 minutes! 🙏",
+  checkin: "🕐 Check-in: 12:00 PM\n🕐 Check-out: 11:00 AM\n\nEarly check-in & late checkout available on request.",
+  contact: "📞 Contact us:\n• Phone: +91 9193232929 / +91 9557660360\n• WhatsApp: wa.me/919193232929\n• Email: Agshobh@gmail.com\n• Address: Near Krishna Janmabhoomi, Mathura, UP\n\nWe respond within 30 minutes! 🙏",
   wifi: "📶 Yes! Free high-speed WiFi is available in all rooms and common areas.",
+  payment: "💳 We accept UPI payments!\n\nAfter booking, you'll get an option to pay via UPI.\nYou can also pay cash at the homestay.\n\nFor any payment queries, WhatsApp us!",
 };
 
 const findResponse = (input: string): string => {
@@ -35,7 +36,8 @@ const findResponse = (input: string): string => {
   if (lower.match(/check.?in|check.?out|time/)) return botResponses.checkin;
   if (lower.match(/contact|phone|call|whatsapp|email/)) return botResponses.contact;
   if (lower.match(/wifi|internet/)) return botResponses.wifi;
-  return "🙏 Thank you for your question! For detailed assistance, please contact us:\n\n📞 +91 9323292299\n💬 WhatsApp: wa.me/9193232929\n📧 Agshobh@gmail.com\n\nOr ask me about rooms, temples, booking, location, or festivals!";
+  if (lower.match(/pay|upi|money|payment/)) return botResponses.payment;
+  return "🙏 Thank you for your question! For detailed assistance, please contact us:\n\n📞 +91 9193232929 / +91 9557660360\n💬 WhatsApp: wa.me/919193232929\n📧 Agshobh@gmail.com\n\nOr ask me about rooms, temples, booking, location, or festivals!";
 };
 
 const Chatbot = () => {
@@ -63,26 +65,20 @@ const Chatbot = () => {
 
   return (
     <>
-      {/* Chat Button */}
       {!open && (
-        <button
-          onClick={() => setOpen(true)}
+        <button onClick={() => setOpen(true)}
           className="fixed bottom-4 right-4 z-50 bg-gradient-saffron text-primary-foreground w-14 h-14 rounded-full shadow-golden flex items-center justify-center hover:scale-110 transition-transform animate-bounce"
-          aria-label="Open chat"
-        >
+          aria-label="Open chat">
           <MessageCircle size={24} />
         </button>
       )}
-
-      {/* Chat Window */}
       {open && (
         <div className="fixed bottom-4 right-4 z-50 w-[calc(100vw-2rem)] sm:w-96 h-[500px] max-h-[80vh] bg-card border border-border rounded-2xl shadow-golden flex flex-col overflow-hidden animate-fade-in">
-          {/* Header */}
           <div className="bg-gradient-saffron text-primary-foreground px-4 py-3 flex items-center justify-between flex-shrink-0">
             <div className="flex items-center gap-2">
               <span className="text-lg">🪷</span>
               <div>
-                <p className="font-heading font-bold text-sm">MadhurVass Assistant</p>
+                <p className="font-heading font-bold text-sm">Madhur Vas Assistant</p>
                 <p className="text-xs opacity-80">Online • Radhe Radhe 🙏</p>
               </div>
             </div>
@@ -90,18 +86,11 @@ const Chatbot = () => {
               <X size={18} />
             </button>
           </div>
-
-          {/* Messages */}
           <div className="flex-1 overflow-y-auto p-3 space-y-3">
             {messages.map((msg, i) => (
               <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-                <div
-                  className={`max-w-[80%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${
-                    msg.role === "user"
-                      ? "bg-gradient-saffron text-primary-foreground rounded-br-md"
-                      : "bg-muted text-foreground rounded-bl-md"
-                  }`}
-                >
+                <div className={`max-w-[80%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${msg.role === "user" ? "bg-gradient-saffron text-primary-foreground rounded-br-md" : "bg-muted text-foreground rounded-bl-md"
+                  }`}>
                   {msg.text}
                 </div>
               </div>
@@ -119,34 +108,19 @@ const Chatbot = () => {
             )}
             <div ref={messagesEndRef} />
           </div>
-
-          {/* Quick Replies */}
           <div className="px-3 pb-2 flex gap-1.5 flex-wrap flex-shrink-0">
-            {["Rooms", "Temples", "Booking", "Location"].map((q) => (
-              <button
-                key={q}
-                onClick={() => { setInput(q); }}
-                className="bg-muted text-muted-foreground text-xs px-2.5 py-1 rounded-full hover:bg-primary/10 hover:text-primary transition-colors"
-              >
+            {["Rooms", "Temples", "Booking", "Location", "Payment"].map((q) => (
+              <button key={q} onClick={() => setInput(q)}
+                className="bg-muted text-muted-foreground text-xs px-2.5 py-1 rounded-full hover:bg-primary/10 hover:text-primary transition-colors">
                 {q}
               </button>
             ))}
           </div>
-
-          {/* Input */}
           <div className="px-3 pb-3 flex gap-2 flex-shrink-0">
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSend()}
-              placeholder="Ask about rooms, temples..."
-              className="flex-1 bg-muted text-foreground rounded-full px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground"
-            />
-            <button
-              onClick={handleSend}
-              disabled={!input.trim()}
-              className="bg-gradient-saffron text-primary-foreground w-10 h-10 rounded-full flex items-center justify-center hover:opacity-90 transition-opacity disabled:opacity-50"
-            >
+            <input value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleSend()}
+              placeholder="Ask about rooms, temples..." className="flex-1 bg-muted text-foreground rounded-full px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground" />
+            <button onClick={handleSend} disabled={!input.trim()}
+              className="bg-gradient-saffron text-primary-foreground w-10 h-10 rounded-full flex items-center justify-center hover:opacity-90 transition-opacity disabled:opacity-50">
               <Send size={16} />
             </button>
           </div>

@@ -14,9 +14,8 @@ const ThemeSwitcher = () => {
             <button
               key={key}
               onClick={() => { setTheme(key); setOpen(false); }}
-              className={`flex items-center gap-2 w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                theme === key ? "bg-primary/15 text-primary" : "text-foreground/70 hover:bg-muted"
-              }`}
+              className={`flex items-center gap-2 w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors ${theme === key ? "bg-primary/15 text-primary" : "text-foreground/70 hover:bg-muted"
+                }`}
             >
               <span>{themeLabels[key].emoji}</span>
               <span>{themeLabels[key].name}</span>
@@ -36,3 +35,4 @@ const ThemeSwitcher = () => {
 };
 
 export default ThemeSwitcher;
+

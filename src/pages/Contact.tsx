@@ -8,11 +8,11 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 
 const testimonials = [
-  { name: "Priya Sharma", text: "A truly divine experience! The warmth of MadhurVass made us feel at home in Krishna's land. The hosts are like family — they even arranged a special darshan for us. 🙏", city: "Delhi", rating: 5 },
+  { name: "Priya Sharma", text: "A truly divine experience! The warmth of Madhur Vas made us feel at home in Krishna's land. The hosts are like family — they even arranged a special darshan for us. 🙏", city: "Delhi", rating: 5 },
   { name: "Rajesh Patel", text: "Perfect location near all major temples. The deluxe room with temple view was magical. Waking up to those bells — unforgettable! We'll definitely come back for Janmashtami.", city: "Ahmedabad", rating: 5 },
   { name: "Sarah Johnson", text: "As a spiritual traveler from London, this was exactly what I was looking for. Peaceful, authentic, and heartwarming. The morning aarti guided tours were the highlight of my trip.", city: "London, UK", rating: 5 },
   { name: "Amit Kumar", text: "Stayed here during Holi with my family — what an experience! The homestay arranged everything for us. Kids loved it, and the family suite was perfect. Very clean and well-maintained.", city: "Mumbai", rating: 5 },
-  { name: "Meera Devi", text: "I come to Mathura every year and MadhurVass is now my permanent address here. The spiritual ambiance, the food recommendations, the warmth — nothing compares. Truly Madhur (sweet)!", city: "Varanasi", rating: 5 },
+  { name: "Meera Devi", text: "I come to Mathura every year and Madhur Vas is now my permanent address here. The spiritual ambiance, the food recommendations, the warmth — nothing compares. Truly Madhur (sweet)!", city: "Varanasi", rating: 5 },
   { name: "David Chen", text: "One of the most unique stays in my world travels. The cultural immersion is real here. The chatbot helped me plan everything before arrival. Highly recommend to all spiritual seekers!", city: "Singapore", rating: 5 },
 ];
 
@@ -51,7 +51,7 @@ const Contact = () => {
           <AnimatedSection className="text-center mb-12">
             <p className="text-primary font-heading text-lg mb-2">🙏 Contact & About</p>
             <h1 className="font-heading text-3xl md:text-5xl font-bold text-foreground mb-3">
-              Get in Touch with <span className="text-gradient-saffron">MadhurVass</span>
+              Get in Touch with <span className="text-gradient-saffron">Madhur Vas</span>
             </h1>
             <p className="text-muted-foreground max-w-xl mx-auto">
               We'd love to hear from you. Whether you're planning a visit or have questions — reach out anytime!
@@ -62,7 +62,7 @@ const Contact = () => {
             {/* About */}
             <AnimatedSection animation="fade-right">
               <div>
-                <h2 className="font-heading text-2xl font-bold text-foreground mb-4">About MadhurVass</h2>
+                <h2 className="font-heading text-2xl font-bold text-foreground mb-4">About Madhur Vas</h2>
                 <div className="space-y-4 text-muted-foreground leading-relaxed text-sm">
                   <p>
                     <strong className="text-foreground">🌟 Our Vision:</strong> To create a spiritual hospitality
@@ -75,7 +75,7 @@ const Contact = () => {
                     — the belief that the guest is a form of God — in every interaction.
                   </p>
                   <p>
-                    <strong className="text-foreground">❤️ Our Story:</strong> Founded in 2019, MadhurVass was born
+                    <strong className="text-foreground">❤️ Our Story:</strong> Founded in 2019, Madhur Vas was born
                     from a simple dream — to share the sweetness (Madhur) of Mathura's spiritual energy with the world.
                     What started as a small 2-room homestay has grown into a beloved retreat for spiritual seekers from
                     across the globe.
@@ -88,21 +88,24 @@ const Contact = () => {
                     <a href="mailto:Agshobh@gmail.com" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
                       <span className="text-lg">📧</span> Agshobh@gmail.com
                     </a>
-                    <a href="tel:+919323292299" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
-                      <span className="text-lg">📞</span> +91 9323292299
+                    <a href="tel:+919193232929" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
+                      <span className="text-lg">📞</span> +91 9193232929
+                    </a>
+                    <a href="tel:+919557660360" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
+                      <span className="text-lg">📞</span> +91 9557660360
                     </a>
                     <a
-                      href="https://www.google.com/maps/dir//Mathura,+Uttar+Pradesh"
+                      href="https://www.google.com/maps/dir//Krishna+Janmabhoomi,+Mathura,+Uttar+Pradesh"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
                     >
-                      <span className="text-lg">📍</span> Mathura, Uttar Pradesh, India
+                      <span className="text-lg">📍</span> Near Krishna Janmabhoomi, Mathura, UP, India
                     </a>
                   </div>
                   <div className="flex flex-col sm:flex-row gap-3 mt-5">
                     <a
-                      href="https://wa.me/9193232929"
+                      href="https://wa.me/919193232929"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center gap-2 bg-green-600 text-primary-foreground px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-green-700 transition-all hover:scale-105"
@@ -110,7 +113,7 @@ const Contact = () => {
                       💬 WhatsApp Chat
                     </a>
                     <a
-                      href="mailto:Agshobh@gmail.com?subject=Inquiry - MadhurVass Homestay"
+                      href="mailto:Agshobh@gmail.com?subject=Inquiry - Madhur Vas Homestay"
                       className="inline-flex items-center justify-center gap-2 bg-accent text-accent-foreground px-5 py-2.5 rounded-lg text-sm font-semibold hover:opacity-90 transition-all hover:scale-105"
                     >
                       📧 Email Inquiry

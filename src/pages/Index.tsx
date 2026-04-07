@@ -32,7 +32,7 @@ const Index = () => (
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
         <AnimatedSection animation="fade-in">
           <p className="text-divine-glow font-heading text-lg md:text-xl mb-4 animate-glow-pulse">
-            🙏 Radhe Radhe — Welcome to MadhurVass
+            🙏 Radhe Radhe — Welcome to Madhur Vas
           </p>
         </AnimatedSection>
         <AnimatedSection animation="fade-up" delay={200}>
@@ -98,14 +98,14 @@ const Index = () => (
             <div>
               <img src={lotusIcon} alt="Lotus mandala" className="w-14 h-14 mb-4 animate-diya-flicker" width={512} height={512} loading="lazy" />
               <h2 className="font-heading text-2xl md:text-4xl font-bold text-foreground mb-4">
-                Welcome to <span className="text-gradient-saffron">MadhurVass</span> Homestay
+                Welcome to <span className="text-gradient-saffron">Madhur Vas</span> Homestay
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Nestled in the divine city of Mathura — the birthplace of Lord Krishna — MadhurVass offers a warm,
+                Nestled in the divine city of Mathura — the birthplace of Lord Krishna — Madhur Vas offers a warm,
                 culturally immersive stay where every moment is infused with spiritual serenity.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                Our name "MadhurVass" means <em>"Sweet Abode"</em> — and that's exactly what we offer. Traditional
+                Our name "Madhur Vas" means <em>"Sweet Abode"</em> — and that's exactly what we offer. Traditional
                 Indian hospitality blended with modern comforts, creating a sacred sanctuary for pilgrims, travelers,
                 and seekers of peace. From the aroma of morning incense to the sound of evening bhajans, every
                 detail is curated for your spiritual journey.
@@ -138,7 +138,7 @@ const Index = () => (
       <div className="container mx-auto px-4">
         <AnimatedSection className="text-center mb-12">
           <h2 className="font-heading text-2xl md:text-4xl font-bold text-foreground mb-3">
-            Why Choose <span className="text-gradient-saffron">MadhurVass</span>?
+            Why Choose <span className="text-gradient-saffron">Madhur Vas</span>?
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">More than a stay — it's a spiritual experience that touches your soul.</p>
         </AnimatedSection>
@@ -166,7 +166,7 @@ const Index = () => (
           {[
             { name: "Priya Sharma", text: "The most divine stay! Waking up to temple bells and the warmth of the hosts made this trip unforgettable. True Atithi Devo Bhava. 🙏", city: "Delhi", rating: 5 },
             { name: "Rajesh Patel", text: "Perfect location — walked to Banke Bihari daily. Rooms are clean, comfortable, and beautifully decorated with traditional charm.", city: "Ahmedabad", rating: 5 },
-            { name: "Sarah Johnson", text: "As a spiritual traveler from London, MadhurVass exceeded all expectations. The cultural immersion was authentic and heartwarming.", city: "London, UK", rating: 5 },
+            { name: "Sarah Johnson", text: "As a spiritual traveler from London, Madhur Vas exceeded all expectations. The cultural immersion was authentic and heartwarming.", city: "London, UK", rating: 5 },
           ].map((t, i) => (
             <AnimatedSection key={i} animation="fade-up" delay={i * 150}>
               <div className="bg-card rounded-xl p-6 border border-border shadow-warm text-center h-full flex flex-col">
@@ -207,7 +207,7 @@ const Index = () => (
               Book Now
             </Link>
             <a
-              href="https://wa.me/9193232929"
+              href="https://wa.me/919193232929"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 border-2 border-primary-foreground text-primary-foreground px-8 py-4 rounded-xl text-base font-semibold hover:bg-primary-foreground/10 transition-colors"

@@ -7,7 +7,7 @@ interface ThemeContextType {
   setTheme: (t: ThemeName) => void;
 }
 
-const ThemeContext = createContext<ThemeContextType>({ theme: "saffron", setTheme: () => {} });
+const ThemeContext = createContext<ThemeContextType>({ theme: "saffron", setTheme: () => { } });
 
 const themes: Record<ThemeName, Record<string, string>> = {
   saffron: {
